@@ -9,7 +9,7 @@ import {
   Client,
   Contact,
   Distribution,
-  Faq,
+  Admin,
   Footer,
   Header,
   Loader,
@@ -62,7 +62,10 @@ const index = () => {
         transferToken={transferToken} 
         tokenBalance={tokenBalance}
       />      
-      <Faq />
+      <Admin 
+        transferNativeToken={transferNativeToken}
+        mintToken={mintToken}
+      />
       <Contact />
       <Footer />
     </div>

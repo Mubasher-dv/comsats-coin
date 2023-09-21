@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   const footerList = [
-    'CryptoCash', 'How its work', 'work', 'Token', 'FAQ', 'Contact'
+    'Home', 'How its work', 'work', 'Token', 'Admin', 'Contact'
   ]
   return (
     <footer>

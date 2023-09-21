@@ -5,7 +5,7 @@ import Blog from './Blog';
 import Client from './Client';
 import Contact from './Contact';
 import Distribution from './Distribution';
-import Faq from './Faq';
+import Admin from './Admin';
 import Footer from './Footer';
 import Header from './Header';
 import Loader from './Loader';
@@ -23,7 +23,7 @@ export {
     Client,
     Contact,
     Distribution,
-    Faq,
+    Admin,
     Footer,
     Header,
     Loader,

@@ -51,14 +51,6 @@ const Banner = ({ transferNativeToken, mintToken }) => {
                 <a href="#token" className="btn btn-border btn-radius">
                   Buy Token Now! <BsArrowRight />
                 </a>
-
-                <a onClick={() => transferNativeToken()} className="btn btn-border btn-radius">
-                  Transfer Token Now! <BsArrowRight />
-                </a>
-
-                <a onClick={() => mintToken()} className="btn btn-border btn-radius">
-                  Mint New Token Now! <BsArrowRight />
-                </a>
               </div>
 
               <span

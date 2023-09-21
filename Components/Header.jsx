@@ -25,8 +25,8 @@ const Header = ({ address, setAddress, ConnectWallet }) => {
       link: "#transfer"
     },
     {
-      menu: 'Faq',
-      link: "#faq"
+      menu: 'Admin',
+      link: "#admin"
     },
     {
       menu: 'Contact',
