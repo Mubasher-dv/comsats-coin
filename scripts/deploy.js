@@ -19,7 +19,7 @@ async function main() {
 
 
     //--TOKEN SALE CONTRACT
-    const _tokenPrice = tokens(0.1);
+    const _tokenPrice = tokens(1);
 
     const TokenSale = await hre.ethers.getContractFactory("TokenSale");
     const tokenSale = await TokenSale.deploy(comsatsCoin.address, _tokenPrice);
