@@ -23,7 +23,7 @@ export const StateContextProvider = ({ children }) => {
     const [tokenHolders, setTokenHolders] = useState([]);
     const [tokenSale, setTokenSale] = useState('')
     const [currentHolder, setCurrentHolder] = useState('');
-    const [tokenBalance, settokenBalance] = useState()
+    const [tokenBalance, setTokenBalance] = useState('')
 
     // --FETCH CONTRACT Data
     const fetchInitialData = async () => {
@@ -42,11 +42,11 @@ export const StateContextProvider = ({ children }) => {
 
             if (account) {
                 let tokenBal = await TOKEN_CONTRACT.balanceOf(account)
-                settokenBalance(tokenBal.toString())
+                console.log(tokenBal.toString())
+                setTokenBalance(tokenBal.toString())
             } else {
-                settokenBalance(0)
+                setTokenBalance(0)
             }
-
             // -- GET ALL TOKEN DATA
             const tokenName = await TOKEN_CONTRACT.name();
             const tokenSymbol = await TOKEN_CONTRACT.symbol();
@@ -63,7 +63,7 @@ export const StateContextProvider = ({ children }) => {
                 tokenOwner: tokenOwner,
                 tokenStandard: tokenStandard,
                 tokenTotalSupply: ethers.utils.formatEther(tokenTotalSupply.toString()),
-                tokenBalance: ethers.utils.formatEther(tokenBalance.toString()),
+                tokenBalance: tokenBalance,
                 tokenHolders: tokenHolders.toNumber()
             }
 
@@ -121,8 +121,8 @@ export const StateContextProvider = ({ children }) => {
             const contract = await connectingTokenSaleContract();
 
             const buying = await contract.buyToken(nToken, {
-                // value: amount.toString()
-                gasLimit: 200000000000
+                value: amount.toString(),
+                gasLimit: 3000000
             })
 
             await buying.wait()
