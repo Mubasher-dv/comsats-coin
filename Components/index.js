@@ -11,7 +11,7 @@ import Header from './Header';
 import Loader from './Loader';
 import MobileApp from './MobileApp';
 import Service from './Service';
-import Team from './Team';
+import Transfer from './Transfer';
 import TimeLine from './TimeLine';
 import TokenSale from './TokenSale';
 
@@ -29,7 +29,7 @@ export {
     Loader,
     MobileApp,
     Service,
-    Team,
+    Transfer,
     TimeLine,
     TokenSale
 }

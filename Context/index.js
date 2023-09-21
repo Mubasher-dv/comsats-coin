@@ -23,6 +23,7 @@ export const StateContextProvider = ({ children }) => {
     const [tokenHolders, setTokenHolders] = useState([]);
     const [tokenSale, setTokenSale] = useState('')
     const [currentHolder, setCurrentHolder] = useState('');
+    const [tokenBalance, settokenBalance] = useState()
 
     // --FETCH CONTRACT Data
     const fetchInitialData = async () => {
@@ -35,14 +36,15 @@ export const StateContextProvider = ({ children }) => {
             setBalance(ethers.utils.formatEther(balance.toString()));
             setAddress(account);
 
+
             //--TOKEN CONTRACT
             const TOKEN_CONTRACT = await connectingTokenContract();
-            let tokenBalance;
 
             if (account) {
-                tokenBalance = await TOKEN_CONTRACT.balanceOf(account)
+                let tokenBal = await TOKEN_CONTRACT.balanceOf(account)
+                settokenBalance(tokenBal.toString())
             } else {
-                tokenBalance = 0;
+                settokenBalance(0)
             }
 
             // -- GET ALL TOKEN DATA
@@ -119,8 +121,8 @@ export const StateContextProvider = ({ children }) => {
             const contract = await connectingTokenSaleContract();
 
             const buying = await contract.buyToken(nToken, {
-                value: amount.toString(),
-                gasLimit: 300000
+                // value: amount.toString()
+                gasLimit: 200000000000
             })
 
             await buying.wait()
@@ -131,8 +133,17 @@ export const StateContextProvider = ({ children }) => {
         }
     }
 
-    const increaseGasLimit = (estimatedGasLimit) => {
-        return estimatedGasLimit.mul(130).div(100) // increase by 30%
+    const mintToken = async () => {
+
+        const TOKEN_AMOUNT = 1000;
+        const tokens = TOKEN_AMOUNT.toString();
+        const transferAmount = ethers.utils.parseEther(tokens);
+        const contract = await connectingTokenContract();
+
+        const minting = await contract.mint(transferAmount);
+        await minting.wait();
+        window.location.reload();
+
     }
 
     //NATIVE TOKEN TRANSFER
@@ -147,7 +158,26 @@ export const StateContextProvider = ({ children }) => {
             const contract = await connectingTokenContract();
             const transaction = await contract.transfer(
                 TOKEN_SALE_CONTRACT,
-                transferAmount,
+                transferAmount
+            );
+            await transaction.wait();
+            console.log(transaction);
+            window.location.reload()
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const transferToken = async (address,nToken) => {
+        try {
+            const tokens = nToken.toString();
+            const transferAmount = ethers.utils.parseEther(tokens);
+
+            const contract = await connectingTokenContract();
+            const transaction = await contract.transfer(
+                address,
+                transferAmount
             );
             await transaction.wait();
             console.log(transaction);
@@ -169,9 +199,12 @@ export const StateContextProvider = ({ children }) => {
                 nativeToken,
                 balance,
                 address,
+                tokenBalance,
                 buyToken,
                 ConnectWallet,
-                setAddress
+                setAddress,
+                mintToken,
+                transferToken
             }}
         >
             {children}

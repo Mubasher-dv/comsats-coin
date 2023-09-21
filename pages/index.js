@@ -15,7 +15,7 @@ import {
   Loader,
   MobileApp,
   Service,
-  Team,
+  Transfer,
   TimeLine,
   TokenSale
 } from '../Components/index';
@@ -29,10 +29,13 @@ const index = () => {
     tokenHolders,
     nativeToken,
     balance,
+    tokenBalance,
     address,
     buyToken,
     ConnectWallet,
-    setAddress
+    setAddress,
+    mintToken,
+    transferToken
   } = useStateContext();
 
 
@@ -45,6 +48,7 @@ const index = () => {
       />
       <Banner
         transferNativeToken={transferNativeToken}
+        mintToken={mintToken}
       />
       <Service />
       <About />
@@ -54,7 +58,10 @@ const index = () => {
       />
       <Distribution />
       <MobileApp />
-      <Team />
+      <Transfer 
+        transferToken={transferToken} 
+        tokenBalance={tokenBalance}
+      />      
       <Faq />
       <Contact />
       <Footer />

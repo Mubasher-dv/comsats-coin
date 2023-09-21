@@ -4,7 +4,7 @@ import { FaEthereum } from 'react-icons/fa';
 import { SiRipple, SiLitecoin } from 'react-icons/si'
 import { AiOutlineCloudDownload } from 'react-icons/ai'
 
-const Banner = ({ transferNativeToken }) => {
+const Banner = ({ transferNativeToken, mintToken }) => {
   return (
     <section
       id="home_section"
@@ -54,6 +54,10 @@ const Banner = ({ transferNativeToken }) => {
 
                 <a onClick={() => transferNativeToken()} className="btn btn-border btn-radius">
                   Transfer Token Now! <BsArrowRight />
+                </a>
+
+                <a onClick={() => mintToken()} className="btn btn-border btn-radius">
+                  Mint New Token Now! <BsArrowRight />
                 </a>
               </div>
 
