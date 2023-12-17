@@ -2,6 +2,8 @@ import { Signer, ethers } from "ethers";
 import Web3Modal from 'web3modal';
 
 import {
+    MARKETPLACE_ADDRESS,
+    MARKETPLACE_ABI,
     TOKEN_ABI,
     TOKEN_ADDRESS,
     TOKEN_SALE_ABI,
@@ -44,7 +46,7 @@ export const ConnectWallet = async () => {
 
 // TOKEN CONTRACT
 
-const fetchTokenContract = (signerOrProvider) => 
+const fetchTokenContract = (signerOrProvider) =>
     new ethers.Contract(TOKEN_ADDRESS, TOKEN_ABI, signerOrProvider)
 
 export const connectingTokenContract = async () => {
@@ -78,8 +80,11 @@ export const getBalance = async () => {
 
 // --TOKEN SALE CONTRACT
 
-const fetchTokenSaleContract = (signerOrProvider) => 
+const fetchTokenSaleContract = (signerOrProvider) =>
     new ethers.Contract(TOKEN_SALE_ADDRESS, TOKEN_SALE_ABI, signerOrProvider)
+
+
+
 
 export const connectingTokenSaleContract = async () => {
     try {

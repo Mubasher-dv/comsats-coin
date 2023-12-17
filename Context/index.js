@@ -7,7 +7,7 @@ import {
     ConnectWallet,
     connectingTokenContract,
     connectingTokenSaleContract,
-    getBalance
+    getBalance,
 } from '../Utils/index';
 
 const StateContext = createContext();
@@ -23,7 +23,7 @@ export const StateContextProvider = ({ children }) => {
     const [tokenHolders, setTokenHolders] = useState([]);
     const [tokenSale, setTokenSale] = useState('')
     const [currentHolder, setCurrentHolder] = useState('');
-    const [tokenBalance, setTokenBalance] = useState('')
+    const [tokenBalance, setTokenBalance] = useState(0)
 
     // --FETCH CONTRACT Data
     const fetchInitialData = async () => {
@@ -169,7 +169,8 @@ export const StateContextProvider = ({ children }) => {
         }
     }
 
-    const transferToken = async (address,nToken) => {
+
+    const transferToken = async (address, nToken) => {
         try {
             const tokens = nToken.toString();
             const transferAmount = ethers.utils.parseEther(tokens);
@@ -177,6 +178,26 @@ export const StateContextProvider = ({ children }) => {
             const contract = await connectingTokenContract();
             const transaction = await contract.transfer(
                 address,
+                transferAmount
+            );
+            await transaction.wait();
+            console.log(transaction);
+            window.location.reload()
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    
+
+    const buyProduct = async (nToken) => {
+        try {
+            const tokens = nToken.toString();
+            const transferAmount = ethers.utils.parseEther(tokens);
+
+            const contract = await connectingTokenContract();
+            const transaction = await contract.buyToken(
                 transferAmount
             );
             await transaction.wait();
@@ -204,7 +225,8 @@ export const StateContextProvider = ({ children }) => {
                 ConnectWallet,
                 setAddress,
                 mintToken,
-                transferToken
+                transferToken,
+                buyProduct,
             }}
         >
             {children}

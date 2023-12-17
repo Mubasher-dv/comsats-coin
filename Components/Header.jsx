@@ -1,5 +1,6 @@
 import React from "react";
 import { BiMenu } from 'react-icons/bi';
+import Image from "next/image";
 
 const Header = ({ address, setAddress, ConnectWallet }) => {
 
@@ -44,7 +45,7 @@ const Header = ({ address, setAddress, ConnectWallet }) => {
             data-animation-delay='1s'
             className="navbar-brand page-scroll animation"
           >
-            <img src="assets/images/logo.png" alt="logo" className="logo_light" />
+            <Image src="/comsats.jpg" alt="logo" className="logo_light" width={150} height={50} />
             <img src="assets/images/logo_dark.png" alt="logo" className="logo_dark" />
           </a>
 

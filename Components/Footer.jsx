@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const Footer = () => {
   const footerList = [
@@ -21,7 +22,7 @@ const Footer = () => {
                 data-animation-delay='0.2s'
               >
                 <a href="#home_section" className="page-scroll">
-                  <img src="assets/images/footer_logo.png" alt="" />
+                <Image src="/comsats.jpg" alt="logo" className="logo_light" width={150} height={50} />
                 </a>
               </div>
 

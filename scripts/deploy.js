@@ -7,7 +7,7 @@ const tokens = (nToken) => {
 async function main() {
     // DEPLOY TOKEN CONTRACT
 
-    const _initialSupply = tokens(500000);
+    const _initialSupply = tokens(100000);
 
     const ComsatsCoin = await hre.ethers.getContractFactory("ComsatsCoin");
 
@@ -26,6 +26,14 @@ async function main() {
 
     await tokenSale.deployed();
     console.log(`the token sale contract address: ${tokenSale.address}`);
+
+    // MARKETPLACE CONTRACT
+
+    const Marketplace = await hre.ethers.getContractFactory("Marketplace");
+    const marketplace = await Marketplace.deploy();
+
+    await marketplace.deployed();
+    console.log(`the Marketplace contract address: ${marketplace.address}`);
 }
 
 main().catch((error) => {

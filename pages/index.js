@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useStateContext } from '../Context/index';
 import {
@@ -19,6 +19,7 @@ import {
   TimeLine,
   TokenSale
 } from '../Components/index';
+import ProductTesting from "../Components/ProductTesting";
 
 const index = () => {
   const {
@@ -35,7 +36,8 @@ const index = () => {
     ConnectWallet,
     setAddress,
     mintToken,
-    transferToken
+    transferToken,
+    buyProduct,
   } = useStateContext();
 
 
@@ -58,16 +60,19 @@ const index = () => {
       />
       <Distribution />
       <MobileApp />
-      <Transfer 
-        transferToken={transferToken} 
+      <Transfer
+        transferToken={transferToken}
         tokenBalance={tokenBalance}
-      />      
-      <Admin 
+      />
+      <Admin
         transferNativeToken={transferNativeToken}
         mintToken={mintToken}
       />
       <Contact />
       <Footer />
+      <ProductTesting
+        buyProduct={buyProduct}
+      />
     </div>
   );
 };

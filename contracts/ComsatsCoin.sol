@@ -83,6 +83,29 @@ contract ComsatsCoin{
     }
 
 
+    function buyToken(uint256 _value) public returns(bool success){
+        require(balanceOf[msg.sender] >= _value);
+        inc();
+
+        balanceOf[msg.sender] -= _value;
+        balanceOf[owner] += _value;
+
+        TokenHolderInfo storage tokenHolderInfo = tokenHolderInfos[owner];
+
+        tokenHolderInfo._to = owner;
+        tokenHolderInfo._from = msg.sender;
+        tokenHolderInfo._tokenHolder = true;
+        tokenHolderInfo._totalToken = _value;
+        tokenHolderInfo._tokenId = _userId;
+
+        holderToken.push(owner);
+
+        emit Transfer(msg.sender, owner, _value);
+
+        return true;
+    }
+
+
     function mint(uint256 tokensToMint) public {
         require(msg.sender == owner, "Only Owner can mint more tokens");
         balanceOf[owner] += tokensToMint;

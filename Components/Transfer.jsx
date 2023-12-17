@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import { BsCurrencyBitcoin, BsArrowRight } from 'react-icons/bs'
 import { SiRipple, SiLitecoin } from 'react-icons/si'
 import { FaEthereum } from 'react-icons/fa'
+import { BigNumber } from "ethers";
 
 const Transfer = ({ transferToken, tokenBalance }) => {
   const [address, setAddress] = useState('');
   const [nToken, setnToken] = useState(1);
+  let token = BigInt(tokenBalance) / 1000000000000000000n;
+  let tokenBal = Number(token)
+  console.log(token)
+  console.log(tokenBal)
+
 
   // const percentage = (tokenSale?.tokenSold / tokenSale.tokenSaleBalance) * 100;
   // const showPercentage = percentage.toString();
@@ -155,7 +161,9 @@ const Transfer = ({ transferToken, tokenBalance }) => {
                     data-animation='fadeInUp'
                     data-animation-delay='0.2s'
                   >
-                    {tokenBalance}
+                    {tokenBal}
+
+                    
                   </p>
                 </div>
 
